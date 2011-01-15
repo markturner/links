@@ -8,8 +8,11 @@ require 'open-uri'
 require 'json'
 
 configure do
-  # set feed url
-  url = 'http://feeds.pinboard.in/rss/u:markturner/'
+  # set username
+  user = 'markturner'
+  
+  # feed url
+  url = "http://feeds.pinboard.in/rss/u:#{user}/"
   
   # get the feed
   @@feed = open(url)
@@ -20,7 +23,11 @@ get '/' do
   
   # use Hpricot to parse the feed
   doc = Hpricot.parse(@@feed)
-  (doc/:item).each do |item|
+  
+  # examine first 5 items (0..4)
+  (doc/:item)[0..4].each do |item|
+    
+    # push items to array
     array << {
       :title => item.search("/title").inner_html,
       # had to use the rdf:about attribute for link because hpricot thinks link is a malformed tag!
@@ -29,6 +36,6 @@ get '/' do
   end
   
   # return array as json object
-  array[0..4].to_json
+  array.to_json
 
 end
