@@ -1,0 +1,7 @@
+---------------------
+Latest Pinboard links
+---------------------
+
+This is a lightweight ruby app, using sinatra, that returns a json feed of the last five links I have posted to Pinboard.
+
+Feel free to steal it and do with it what you wish
