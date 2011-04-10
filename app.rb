@@ -33,7 +33,8 @@ get '/' do
     array << {
       :title => item.search("/title").inner_html,
       # had to use the rdf:about attribute for link because hpricot thinks link is a malformed tag!
-      :url => item.attributes['rdf:about']
+      :url => item.attributes['rdf:about'],
+      :description => item.search("/description").inner_text
     }
   end
   
